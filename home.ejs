@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><title>NexaEverything</title></head><body style="font-family:Arial;background:#0b0f13;color:#fff;padding:20px">
+<h1>NexaEverything</h1>
+<% if (user) { %>
+  <p>Welcome <%= user.username %>#<%= user.discriminator %></p>
+  <p><a href="/dashboard">Open Dashboard</a></p>
+<% } else { %>
+  <p><a href="/login">Login with Discord</a></p>
+<% } %>
+</body></html>
