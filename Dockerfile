@@ -1,13 +1,20 @@
-# Use full Node.js image (not Alpine) to avoid native module build issues
+# Use full Node.js image
 FROM node:22
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files
+# Install build tools needed for native modules
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    git \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy package files first (allows caching)
 COPY package*.json ./
 
-# Install dependencies (omit dev)
+# Install dependencies
 RUN npm install --omit=dev
 
 # Copy the rest of the project
